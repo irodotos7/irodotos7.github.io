@@ -88,25 +88,32 @@ We checked memory usage using [VisualVM](https://visualvm.github.io/), with diff
 
 ### - 100 files with a size of 50MB each
 
-![{{< photo  src="/images/blogs/zip-partitioner/100_files_50MB_each.png" width="100%">}}](images/100-files-heap.png)
 
-![{{< photo  src="/images/blogs/zip-partitioner/proof_100_files_50MB_each.png" width="100%" height="7%">}}<br>](images/100-files.png)
+![100 files, 50MB each heap](/images/blogs/zip-partitioner/100_files_50MB_each.png)
+
+
+![100 files, 50MB each proof](/images/blogs/zip-partitioner/proof_100_files_50MB_each.png)
 
 ### - 500 files with a size of 10MB each
 
-![{{< photo  src="/images/blogs/zip-partitioner/500_files_10MB_each.png" width="100%">}}](images/500-files-heap.png)
 
-![{{< photo  src="/images/blogs/zip-partitioner/proof_500_files_10MB_each.png" width="100%" height="7%">}}<br>](images/500-files.png)
+![500 files, 10MB each heap](/images/blogs/zip-partitioner/500_files_10MB_each.png)
+
+
+![500 files, 10MB each proof](/images/blogs/zip-partitioner/proof_500_files_10MB_each.png)
 
 ### - 1000 files with a size of 10MB each
 
-![{{< photo  src="/images/blogs/zip-partitioner/1000_files_10MB_each.png" width="100%">}}](images/1000-files-heap.png)
 
-![{{< photo  src="/images/blogs/zip-partitioner/proof_1000_files_10MB_each.png" width="100%" height="7%">}}<br>](images/1000-files.png)
+![1000 files, 10MB each heap](/images/blogs/zip-partitioner/1000_files_10MB_each.png)
+
+
+![1000 files, 10MB each proof](/images/blogs/zip-partitioner/proof_1000_files_10MB_each.png)
 
 ### - 1000 files wth a size of 10MB each but now my JVM heap size is smaller
 
-![{{< photo  src="/images/blogs/zip-partitioner/1000_files_smaller_heap.png" width="100%">}}<br>](images/1000-files-heap2.png)
+
+![1000 files, 10MB each, smaller heap](/images/blogs/zip-partitioner/1000_files_smaller_heap.png)
 
 ## Key Takeaways
 
