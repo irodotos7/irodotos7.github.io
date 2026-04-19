@@ -1,6 +1,6 @@
 ---
 title: "Troubleshooting with Git Bisect"
-date: 2024-07-02
+date: 2025-05-26
 tags:
     - Git
     - Bisect
