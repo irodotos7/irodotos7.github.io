@@ -7,12 +7,8 @@ tags:
     - Debugging
 author: Irodotos Apostolou
 ---
-# Troubleshooting with Git Bisect
 
-**Irodotos Apostolou**
-Jul 2, 2024 · 2 min read
-
----
+## Setting the scene
 
 Have you ever faced a bug in your codebase and thought:
 

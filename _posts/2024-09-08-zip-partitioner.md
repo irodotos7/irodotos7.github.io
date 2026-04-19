@@ -8,14 +8,6 @@ tags:
   - fs2
 author: Irodotos Apostolou
 ---
-# Efficiently Streaming and Zipping Multiple Files from S3 using fs2
-
-**Tags:** Scala, AWS, Stream, fs2
-
-**Irodotos Apostolou**
-Sept 8, 2024 · 4 min read 
-
-![Book thumbnail](images/book.png)
 
 ## Setting the scene
 
