@@ -21,7 +21,7 @@ Since the number of files and their individual size varies, we need to safeguard
 
 ## The Architecture
 
-![zip-partitioner-architecture](/images/zip-paritioner-architecture.png)
+![zip partitioner architecture]({{ '/assets/images/posts/zip-paritioner-architecture.png' | relative_url }})
 In order to optimise our zip construction, we segregated the original content from the optimised file format we use in the downloading process.
 
 This also gives us the flexibility to evolve the two processes independently (reading and writing) for later changes in requirements or optimisations, since the generated format is loosely coupled with the downloadable format.
@@ -79,31 +79,31 @@ We checked memory usage using [VisualVM](https://visualvm.github.io/), with diff
 ### - 100 files with a size of 50MB each
 
 
-![100 files, 50MB each heap](/images/blogs/zip-partitioner/100_files_50MB_each.png)
+![100 files, 50MB each heap]({{ '/assets/images/posts/100-files-heap.png' | relative_url }})
 
 
-![100 files, 50MB each proof](/images/blogs/zip-partitioner/proof_100_files_50MB_each.png)
+![100 files, 50MB each proof]({{ '/assets/images/posts/100-files.png' | relative_url }})
 
 ### - 500 files with a size of 10MB each
 
 
-![500 files, 10MB each heap](/images/blogs/zip-partitioner/500_files_10MB_each.png)
+![500 files, 10MB each heap]({{ '/assets/images/posts/500-files-heap.png' | relative_url }})
 
 
-![500 files, 10MB each proof](/images/blogs/zip-partitioner/proof_500_files_10MB_each.png)
+![500 files, 10MB each proof]({{ '/assets/images/posts/500-files.png' | relative_url }})
 
 ### - 1000 files with a size of 10MB each
 
 
-![1000 files, 10MB each heap](/images/blogs/zip-partitioner/1000_files_10MB_each.png)
+![1000 files, 10MB each heap]({{ '/assets/images/posts/1000-files-heap.png' | relative_url }})
 
 
-![1000 files, 10MB each proof](/images/blogs/zip-partitioner/proof_1000_files_10MB_each.png)
+![1000 files, 10MB each proof]({{ '/assets/images/posts/1000-files.png' | relative_url }})
 
 ### - 1000 files wth a size of 10MB each but now my JVM heap size is smaller
 
 
-![1000 files, 10MB each, smaller heap](/images/blogs/zip-partitioner/1000_files_smaller_heap.png)
+![1000 files, 10MB each, smaller heap]({{ '/assets/images/posts/1000-files-heap2.png' | relative_url }})
 
 ## Key Takeaways
 

@@ -1,0 +1,37 @@
+@use "tokens" as *;
+
+@mixin serif-heading($line-height: 1.05, $tracking: -0.04em) {
+  font-family: $font-serif;
+  line-height: $line-height;
+  letter-spacing: $tracking;
+}
+
+@mixin panel($bg: var(--surface), $radius: var(--radius-lg), $border: $panel-border) {
+  border: 1px solid $border;
+  border-radius: $radius;
+  background: $bg;
+  box-shadow: var(--shadow);
+}
+
+@mixin liftable {
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-2px);
+  }
+}
+
+@mixin pill {
+  padding: 0.45rem 0.8rem;
+  border: 1px solid $pill-border;
+  border-radius: 999px;
+  background: $pill-bg;
+  color: var(--accent-dark);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+@mixin section-spacing {
+  margin-top: 2rem;
+}

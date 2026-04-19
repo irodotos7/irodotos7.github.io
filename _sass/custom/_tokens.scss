@@ -1,0 +1,23 @@
+$font-serif: "Fraunces", Georgia, serif;
+$font-sans: "Manrope", "Segoe UI", sans-serif;
+$font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+
+$panel-border: rgba(20, 33, 43, 0.08);
+$panel-border-strong: rgba(20, 33, 43, 0.12);
+$pill-border: rgba(194, 96, 46, 0.18);
+$pill-bg: rgba(194, 96, 46, 0.08);
+$light-overlay: rgba(255, 255, 255, 0.5);
+$light-overlay-strong: rgba(255, 255, 255, 0.64);
+
+:root {
+  --surface: rgba(255, 252, 247, 0.86);
+  --ink: #14212b;
+  --muted: #586571;
+  --line: #{$panel-border-strong};
+  --accent: #c2602e;
+  --accent-dark: #8f4421;
+  --shadow: 0 20px 45px rgba(20, 33, 43, 0.12);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+}

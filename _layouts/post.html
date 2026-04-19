@@ -1,0 +1,153 @@
+---
+layout: default
+---
+
+<article class="post-template">
+  <div class="post-shell">
+    <div class="post-main">
+      <nav class="post-breadcrumbs" aria-label="Breadcrumb">
+        <a href="{{ '/' | relative_url }}">Home</a>
+        <span>/</span>
+        <a href="{{ '/' | relative_url }}#writing">Posts</a>
+        <span>/</span>
+        <span aria-current="page">{{ page.title }}</span>
+      </nav>
+
+      <header class="post-hero">
+        <p class="eyebrow">Article</p>
+        <h1>{{ page.title }}</h1>
+
+        <div class="post-meta-line">
+          <span>Posted on {{ page.date | date: "%B %-d, %Y" }}</span>
+          <span>{{ content | number_of_words | divided_by: 180 | plus: 1 }} min read</span>
+          <span>{{ content | number_of_words }} words</span>
+          {% if page.author %}
+            <span>{{ page.author }}</span>
+          {% endif %}
+        </div>
+
+        {% if page.tags %}
+          <ul class="tag-list">
+            {% for tag in page.tags %}
+              <li>{{ tag }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        <div class="post-actions">
+          <span>Share</span>
+          <a class="share-linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url={{ page.url | relative_url | url_encode }}" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a class="share-x" href="https://twitter.com/intent/tweet?url={{ page.url | relative_url | url_encode }}&text={{ page.title | url_encode }}" target="_blank" rel="noreferrer">X</a>
+          <button class="copy-link-button" type="button" data-copy-url="{{ page.url | relative_url }}">Copy link</button>
+        </div>
+      </header>
+
+      <div class="post-body">
+        {{ content }}
+      </div>
+    </div>
+
+    <aside class="post-sidebar" aria-label="Article details">
+      <div class="post-sidebar-card">
+        <p class="post-sidebar-title">On this page</p>
+        <nav class="post-toc" aria-label="Table of contents">
+          <ul class="post-toc-list"></ul>
+        </nav>
+      </div>
+    </aside>
+  </div>
+</article>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const body = document.querySelector(".post-body");
+    const tocList = document.querySelector(".post-toc-list");
+    const copyButton = document.querySelector(".copy-link-button");
+    const shareLinkedIn = document.querySelector(".share-linkedin");
+    const shareX = document.querySelector(".share-x");
+
+    if (shareLinkedIn) {
+      shareLinkedIn.href = "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent(window.location.href);
+    }
+
+    if (shareX) {
+      shareX.href = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(window.location.href) + "&text=" + encodeURIComponent(document.title);
+    }
+
+    if (copyButton) {
+      copyButton.addEventListener("click", async function () {
+        const url = window.location.href || copyButton.getAttribute("data-copy-url");
+
+        try {
+          await navigator.clipboard.writeText(url);
+          copyButton.textContent = "Copied";
+          window.setTimeout(function () {
+            copyButton.textContent = "Copy link";
+          }, 1600);
+        } catch (error) {
+          copyButton.textContent = "Copy failed";
+        }
+      });
+    }
+
+    if (!body || !tocList) return;
+
+    const headings = body.querySelectorAll("h2, h3");
+
+    if (!headings.length) {
+      const sidebar = document.querySelector(".post-sidebar");
+      if (sidebar) sidebar.hidden = true;
+      return;
+    }
+
+    const slugify = function (text) {
+      return text
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-");
+    };
+
+    headings.forEach(function (heading, index) {
+      if (!heading.id) {
+        heading.id = slugify(heading.textContent) || "section-" + index;
+      }
+
+      const item = document.createElement("li");
+      item.className = heading.tagName.toLowerCase() === "h3" ? "toc-child" : "toc-parent";
+
+      const link = document.createElement("a");
+      link.href = "#" + heading.id;
+      link.textContent = heading.textContent;
+
+      item.appendChild(link);
+      tocList.appendChild(item);
+    });
+
+    const links = Array.from(tocList.querySelectorAll("a"));
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          const id = entry.target.id;
+          const activeLink = tocList.querySelector('a[href="#' + id + '"]');
+          if (!activeLink) return;
+
+          if (entry.isIntersecting) {
+            links.forEach(function (link) {
+              link.classList.remove("is-active");
+            });
+            activeLink.classList.add("is-active");
+          }
+        });
+      },
+      {
+        rootMargin: "-20% 0px -65% 0px",
+        threshold: 1
+      }
+    );
+
+    headings.forEach(function (heading) {
+      observer.observe(heading);
+    });
+  });
+</script>

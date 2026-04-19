@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+        Troubleshooting with Git Bisect | Irodotos7 homepage
+      
+    </title>
+    <meta name="description" content="Setting the scene">
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Troubleshooting with Git Bisect" />
+<meta name="author" content="Irodotos Apostolou" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Setting the scene" />
+<meta property="og:description" content="Setting the scene" />
+<link rel="canonical" href="http://localhost:4000/2024/07/02/git-bisect.html" />
+<meta property="og:url" content="http://localhost:4000/2024/07/02/git-bisect.html" />
+<meta property="og:site_name" content="Irodotos7 homepage" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-07-02T00:00:00+03:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Troubleshooting with Git Bisect" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Irodotos Apostolou"},"dateModified":"2024-07-02T00:00:00+03:00","datePublished":"2024-07-02T00:00:00+03:00","description":"Setting the scene","headline":"Troubleshooting with Git Bisect","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2024/07/02/git-bisect.html"},"url":"http://localhost:4000/2024/07/02/git-bisect.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#0f1720">
+<link rel="stylesheet" href="/assets/css/custom.css">
+
+  </head>
+  <body class="site-shell">
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <header class="site-chrome">
+      <div class="shell">
+        <div class="brand-block">
+          <a class="site-brand" href="/">Irodotos7 homepage</a>
+          <p class="site-tagline">Production-minded notes on backend engineering, cloud tooling, and developer workflows.</p>
+        </div>
+
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/">Home</a>
+          <a href="/#writing">Writing</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <div class="shell">
+        <article class="post-template">
+  <div class="post-shell">
+    <div class="post-main">
+      <nav class="post-breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/#writing">Posts</a>
+        <span>/</span>
+        <span aria-current="page">Troubleshooting with Git Bisect</span>
+      </nav>
+
+      <header class="post-hero">
+        <p class="eyebrow">Article</p>
+        <h1>Troubleshooting with Git Bisect</h1>
+
+        <div class="post-meta-line">
+          <span>Posted on July 2, 2024</span>
+          <span>6 min read</span>
+          <span>1013 words</span>
+          
+            <span>Irodotos Apostolou</span>
+          
+        </div>
+
+        
+          <ul class="tag-list">
+            
+              <li>Git</li>
+            
+              <li>Bisect</li>
+            
+              <li>Debugging</li>
+            
+          </ul>
+        
+
+        <div class="post-actions">
+          <span>Share</span>
+          <a class="share-linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2024%2F07%2F02%2Fgit-bisect.html" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a class="share-x" href="https://twitter.com/intent/tweet?url=%2F2024%2F07%2F02%2Fgit-bisect.html&text=Troubleshooting+with+Git+Bisect" target="_blank" rel="noreferrer">X</a>
+          <button class="copy-link-button" type="button" data-copy-url="/2024/07/02/git-bisect.html">Copy link</button>
+        </div>
+      </header>
+
+      <div class="post-body">
+        <h2 id="setting-the-scene">Setting the scene</h2>
+
+<p>Have you ever faced a bug in your codebase and thought:</p>
+
+<blockquote>
+  <p>“This was working before… what changed?”</p>
+</blockquote>
+
+<p>When working on any software project, encountering bugs is inevitable. Recently, while enhancing Android support for the <a href="https://github.com/com-lihaoyi/mill">Mill</a> build tool, our team faced an issue: our screenshot tests suddenly stopped working after a series of commits. Identifying the piece of code that causes an issue often translates to hours of debugging, running the code in various states, and observing its behaviour.</p>
+
+<p>Luckily, if you know that a particular piece of code was working at some point, you can avoid diving into the code internals and identify the moment in time when the issue was introduced. Git offers a powerful tool for exactly this kind of problem: <strong>git bisect</strong>.</p>
+
+<h2 id="the-challenge-a-needle-in-a-haystack">The Challenge: A Needle in a Haystack</h2>
+
+<p>After several commits were merged into our development branch for Mill’s Android support, we noticed that our screenshot tests were consistently failing. Screenshot tests are helpful in detecting regressions associated with the User Interface. We knew when we first introduced them that they were working. At some point they started failing consistently. Due to various reasons (including flaky tests) we haven’t noticed for some time!</p>
+
+<h2 id="enter-git-bisect-your-commit-history-detective">Enter git bisect: Your Commit History Detective</h2>
+
+<p>We needed an approach to find the exact commit that started the failures! This is where git, with its bisect tool, saves the day!. It’s a Git command that performs an automated binary search through your project’s commit history. You tell it a “bad” commit where the bug is present and a “good” commit where the bug is absent. git bisect then repeatedly checks out a commit halfway between the known good and bad points, and you simply test that version and tell Git whether it’s “good” or “bad.” This process halves the search space with each step, quickly isolating the first commit that introduced the issue.</p>
+
+<h2 id="our-git-bisect-journey-with-mill">Our git bisect Journey with Mill</h2>
+
+<p>To find the commit that broke our Android screenshot tests in the Mill project, we followed these steps:</p>
+
+<p>1) We initiated the bisecting process using git bisect start.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git bisect start
+</code></pre></div></div>
+
+<p>2) We identified the current commit (HEAD) as “bad” since the screenshot tests were failing. In our case, we determined whether a commit was “good” or “bad” based on whether the screenshot tests were running properly.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git bisect bad HEAD
+</code></pre></div></div>
+
+<p>3) We then found an older commit hash where we were certain the screenshot tests were passing and marked it as “good.”</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git bisect good 916628b
+</code></pre></div></div>
+
+<p>Git then automatically checked out a commit roughly in the middle of this range.</p>
+
+<p>At each step, we rebuilt the relevant part of the Mill project and ran the Android screenshot tests.</p>
+
+<p>If the tests passed, we informed Git with</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git bisect good
+</code></pre></div></div>
+
+<p>If they failed, we used</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git bisect bad
+</code></pre></div></div>
+
+<p>We continued narrowing the range, checking out new commits for us to test.</p>
+
+<p>This iterative process continued, with git bisect guiding us through the commit history.</p>
+
+<h2 id="lets-go-through-an-example-with-numbers-to-understand-how-git-bisect-works">Let’s go through an example with numbers to understand how git bisect works</h2>
+
+<p>In a scenario where we have commit_1 to commit_50, and the problem is on commit_23 we start with</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git bisect good commit_1
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git bisect bad commit_50
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/GitBisect1.png" alt="git bisect first split" /></p>
+
+<p>Now Git will checkout at the commit_25 and it will ask if this is a “good” or “bad” commit. Why commit_25? Beacuse (50+1)/2 = 25.5. We always rounding to the lower number, so the final answer is 25.  In this scenario, commit_25 is bad, because the screenshot tests are failing, so we need to run</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git bisect bad
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/GitBisect2.png" alt="git bisect second split" /></p>
+
+<p>Now git will go to commit_13. Why? (25+1)/2 = 13. In this scenario, commit_13 is good, because the screenshot tests are running properly, so we run</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git bisect good
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/GitBisect3.png" alt="git bisect third split" /></p>
+
+<p>Git now will go to commit_22 because (19+25)/2 = 22. Again, 22 is a  good commit</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git bisect good
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/GitBisect4.png" alt="git bisect fourth split" /></p>
+
+<p>Now git goes to commit_23 because (22+25)/2 = 23.5, but we always get the lower rounding, so it’s 23.</p>
+
+<p>commit_23 is a bad commit because now the screenshot tests are failing</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git bisect bad
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/GitBisect5.png" alt="git bisect final split" /></p>
+
+<p>There are no other commits to check because commit_23 is “bad” and we know that commit_22 is “good”, so the git bisect is done, and Git will tell us that commit_23 was the last “bad” commit we had</p>
+
+<h2 id="the-revelation-and-the-fix">The Revelation and the Fix</h2>
+
+<p>After a few iterations with git bisect, we pinpointed the exact commit that introduced the failure in our screenshot tests. Upon inspecting the changes in this specific commit, we quickly identified the problematic code.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">testEnableWorkStealing</span><span class="k">:</span> <span class="kt">T</span><span class="o">[</span><span class="kt">Boolean</span><span class="o">]</span> <span class="k">=</span> <span class="nf">T</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Screenshot tests cannot run in parallel like the other tests.</p>
+
+<p>Once the problematic change was reverted, we re-ran the screenshot tests, and they passed successfully. The fix was then incorporated into a pull request, which you can see here: https://github.com/com-lihaoyi/mill/pull/4979</p>
+
+<h2 id="back-on-track-thanks-to-git-bisect">Back on Track Thanks to git bisect</h2>
+
+<p>The git bisect command proved invaluable in this scenario, saving us significant time and effort. Instead of a manual and potentially lengthy search, we were able to efficiently and systematically identify the root cause of the regression in Mill’s Android screenshot testing. Using binary search we found the problem is log(N) steps, easily and fast</p>
+
+<p>If you ever find yourself wondering which commit introduced a bug into your codebase, remember <code class="language-plaintext highlighter-rouge">git bisect</code>. It’s a powerful ally in your debugging toolkit. For more detailed information on its usage, refer to the official documentation.</p>
+
+      </div>
+    </div>
+
+    <aside class="post-sidebar" aria-label="Article details">
+      <div class="post-sidebar-card">
+        <p class="post-sidebar-title">On this page</p>
+        <nav class="post-toc" aria-label="Table of contents">
+          <ul class="post-toc-list"></ul>
+        </nav>
+      </div>
+    </aside>
+  </div>
+</article>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const body = document.querySelector(".post-body");
+    const tocList = document.querySelector(".post-toc-list");
+    const copyButton = document.querySelector(".copy-link-button");
+    const shareLinkedIn = document.querySelector(".share-linkedin");
+    const shareX = document.querySelector(".share-x");
+
+    if (shareLinkedIn) {
+      shareLinkedIn.href = "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent(window.location.href);
+    }
+
+    if (shareX) {
+      shareX.href = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(window.location.href) + "&text=" + encodeURIComponent(document.title);
+    }
+
+    if (copyButton) {
+      copyButton.addEventListener("click", async function () {
+        const url = window.location.href || copyButton.getAttribute("data-copy-url");
+
+        try {
+          await navigator.clipboard.writeText(url);
+          copyButton.textContent = "Copied";
+          window.setTimeout(function () {
+            copyButton.textContent = "Copy link";
+          }, 1600);
+        } catch (error) {
+          copyButton.textContent = "Copy failed";
+        }
+      });
+    }
+
+    if (!body || !tocList) return;
+
+    const headings = body.querySelectorAll("h2, h3");
+
+    if (!headings.length) {
+      const sidebar = document.querySelector(".post-sidebar");
+      if (sidebar) sidebar.hidden = true;
+      return;
+    }
+
+    const slugify = function (text) {
+      return text
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-");
+    };
+
+    headings.forEach(function (heading, index) {
+      if (!heading.id) {
+        heading.id = slugify(heading.textContent) || "section-" + index;
+      }
+
+      const item = document.createElement("li");
+      item.className = heading.tagName.toLowerCase() === "h3" ? "toc-child" : "toc-parent";
+
+      const link = document.createElement("a");
+      link.href = "#" + heading.id;
+      link.textContent = heading.textContent;
+
+      item.appendChild(link);
+      tocList.appendChild(item);
+    });
+
+    const links = Array.from(tocList.querySelectorAll("a"));
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          const id = entry.target.id;
+          const activeLink = tocList.querySelector('a[href="#' + id + '"]');
+          if (!activeLink) return;
+
+          if (entry.isIntersecting) {
+            links.forEach(function (link) {
+              link.classList.remove("is-active");
+            });
+            activeLink.classList.add("is-active");
+          }
+        });
+      },
+      {
+        rootMargin: "-20% 0px -65% 0px",
+        threshold: 1
+      }
+    );
+
+    headings.forEach(function (heading) {
+      observer.observe(heading);
+    });
+  });
+</script>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <p>Irodotos7 homepage</p>
+        <p>Bookmark this to keep an eye on my project updates!</p>
+      </div>
+    </footer>
+  </body>
+</html>

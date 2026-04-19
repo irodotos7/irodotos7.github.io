@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      {% if page.title and page.title != "Home" %}
+        {{ page.title | escape }} | {{ site.title | escape }}
+      {% else %}
+        {{ site.title | escape }}
+      {% endif %}
+    </title>
+    <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 | escape }}">
+    {% seo title=false %}
+    {% include head.html %}
+  </head>
+  <body class="site-shell{% if page.url == '/' %} is-home{% endif %}">
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <header class="site-chrome">
+      <div class="shell">
+        <div class="brand-block">
+          <a class="site-brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+          <p class="site-tagline">Production-minded notes on backend engineering, cloud tooling, and developer workflows.</p>
+        </div>
+
+        <nav class="site-nav" aria-label="Primary">
+          <a href="{{ '/' | relative_url }}">Home</a>
+          <a href="{{ '/' | relative_url }}#writing">Writing</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <div class="shell">
+        {{ content }}
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-inner">
+        <p>{{ site.title }}</p>
+        <p>{{ site.description }}</p>
+      </div>
+    </footer>
+  </body>
+</html>
