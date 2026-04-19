@@ -1,5 +1,7 @@
 title: Irodotos7 homepage
 description: Bookmark this to keep an eye on my project updates!
+url: "https://irodotos7.github.io"
+baseurl: ""
 plugins:
   - jekyll-seo-tag
 defaults:
