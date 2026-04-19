@@ -1,0 +1,21 @@
+ul.post-list {
+  list-style: none;
+  padding: 0;
+}
+ul.post-list li {
+  margin: 1em 0;
+  padding: 1em;
+  background: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px #0001;
+}
+ul.post-list a {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #2a5db0;
+  text-decoration: none;
+}
+ul.post-list small {
+  color: #888;
+  margin-left: 1em;
+}
