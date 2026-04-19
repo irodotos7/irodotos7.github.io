@@ -90,7 +90,7 @@ git bisect good commit_1
 git bisect bad commit_50
 ```
 
-![alt text](images/GitBisect1.png)
+![alt text](/images/GitBisect1.png)
 
 Now Git will checkout at the commit_25 and it will ask if this is a "good" or "bad" commit. Why commit_25? Beacuse (50+1)/2 = 25.5. We always rounding to the lower number, so the final answer is 25.  In this scenario, commit_25 is bad, because the screenshot tests are failing, so we need to run
 
@@ -98,7 +98,7 @@ Now Git will checkout at the commit_25 and it will ask if this is a "good" or "b
 git bisect bad
 ```
 
-![alt text](images/GitBisect2.png)
+![alt text](/images/GitBisect2.png)
 
 Now git will go to commit_13. Why? (25+1)/2 = 13. In this scenario, commit_13 is good, because the screenshot tests are running properly, so we run
 
@@ -106,7 +106,7 @@ Now git will go to commit_13. Why? (25+1)/2 = 13. In this scenario, commit_13 is
 git bisect good
 ```
 
-![alt text](images/GitBisect3.png)
+![alt text](/images/GitBisect3.png)
 
 Git now will go to commit_22 because (19+25)/2 = 22. Again, 22 is a  good commit 
 
@@ -114,7 +114,7 @@ Git now will go to commit_22 because (19+25)/2 = 22. Again, 22 is a  good commit
 git bisect good
 ```
 
-![alt text](images/GitBisect4.png)
+![alt text](/images/GitBisect4.png)
 
 Now git goes to commit_23 because (22+25)/2 = 23.5, but we always get the lower rounding, so it's 23.
 
@@ -124,7 +124,7 @@ commit_23 is a bad commit because now the screenshot tests are failing
 git bisect bad
 ```
 
-![alt text](images/GitBisect5.png)
+![alt text](/images/GitBisect5.png)
 
 There are no other commits to check because commit_23 is "bad" and we know that commit_22 is "good", so the git bisect is done, and Git will tell us that commit_23 was the last "bad" commit we had
 

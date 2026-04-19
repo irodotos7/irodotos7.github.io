@@ -21,7 +21,7 @@ Since the number of files and their individual size varies, we need to safeguard
 
 ## The Architecture
 
-![zip-partitioner-architecture](images/zip-paritioner-architecture.png)
+![zip-partitioner-architecture](/images/zip-paritioner-architecture.png)
 In order to optimise our zip construction, we segregated the original content from the optimised file format we use in the downloading process.
 
 This also gives us the flexibility to evolve the two processes independently (reading and writing) for later changes in requirements or optimisations, since the generated format is loosely coupled with the downloadable format.
