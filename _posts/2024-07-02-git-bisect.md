@@ -2,9 +2,9 @@
 title: "Troubleshooting with Git Bisect"
 date: 2024-07-02
 tags:
-	- git
-	- bisect
-	- debugging
+    - Git
+    - Bisect
+    - Debugging
 author: Irodotos Apostolou
 ---
 # Troubleshooting with Git Bisect
