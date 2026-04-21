@@ -75,3 +75,97 @@ We introduce **three endpoints** and **two token types**:
 ## High-Level Flow
 
 ![high-level-flow](/assets/images/posts/secure-session-kms-jwt-with-diagrams/high-level-flow.png)
+
+## Step-by-Step Breakdown
+
+### 1) `GET /prevalidate/key:key`
+
+#### Purpose
+
+- Validate player key
+- Return session state only (no session creation)
+
+#### Output
+
+**A preassessment token**
+
+Example Claims
+```
+{
+  "key": "k_abc123",
+  "sessionKey": null,
+  "sessionStatus": "NotStarted" | "Started" | Completed,
+  "previouslyCompleted": [],
+  "timestamp": "2024-01-15T10:00:00Z"
+}
+```
+
+*previouslyCompleted allows reuse of past sessions.*
+
+### 2) Validate
+
+`POST /v2/session/validate`
+
+#### Input
+- Bearer token: preassessment JWT
+
+#### What happens
+- Verify token via KMS
+- Enforce token type (cty = preassessment)
+- Run validation logic
+- Create or resume session
+
+#### Output
+
+**A session token**
+```
+{
+  "sessionKey": "sk_xyz789",
+  "key": "kk_abc123",
+  "reused", True | False,
+  "timestamp": "2024-01-15T10:01:00Z"
+}
+```
+
+### 3) Upload
+
+`POST /v2/upload_session`
+
+#### Input
+- Bearer token: session JWT
+
+#### What happens
+- Verify token via KMS
+- Extract sessionKey from token
+- Insert events using that key
+
+Request Example
+```
+{
+  "key": "kk_abc123",
+  "session_events": {
+    "data": [
+      ...
+    ]
+  }
+}
+```
+
+## Token Design
+### Two Token Types
+
+| Property   | Preassessment     | Session     |
+| ---------- | ----------------- | ----------- |
+| `cty`      | `"preassessment"` | `"session"` |
+| sessionKey | Optional          | Required    |
+| Used by    | validate          | upload      |
+
+## JWT Structure
+```
+Header:  { "alg": "RS256", "kid": "<kms-key-id>", "cty": "session" }
+Payload: { ...claims, "iat": ..., "exp": ... }
+```
+
+## Signing Flow
+
+![signingflow](/assets/images/posts/secure-session-kms-jwt-with-diagrams/signing-flow.png)
