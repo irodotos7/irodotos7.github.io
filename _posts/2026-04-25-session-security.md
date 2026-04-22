@@ -1,5 +1,5 @@
 ---
-title: "Secure Session Workflows with AWS KMS-Signed JWTs"
+title: "Secure Session Workflows with AWS KMS-Signed JWTs (JWS)"
 date: 2026-04-21
 tags:
     - KMS
@@ -14,7 +14,7 @@ How do you trust a client’s session during upload without re-running expensive
 
 In this post, we’ll walk through a production-grade pattern using:
 
-- Short-lived JWTs ( to be exact we have JWS beacuse we are signing it)
+- Short-lived signed JWTs (JWS)
 - AWS KMS for signing & verification
 - A token chaining model that enforces trust across steps
 
@@ -46,7 +46,7 @@ Client submits gameplay events tied to that session
 ## The Naive Approach
 ```
 POST /upload_session
-→ Accept player_key + session_key
+→ Accept key + session_key
 → Re-run validation logic or just accept the data
 ```
 
