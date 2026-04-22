@@ -20,7 +20,7 @@ In this post, we’ll walk through a production-grade pattern using:
 
 ## The Goal
 
-We wanted to guarantee:
+### We wanted to guarantee:
 
 - A session is validated exactly once
 - Uploads are cryptographically bound to that validation
@@ -30,16 +30,16 @@ We wanted to guarantee:
 
 ## The Problem
 
-Our session lifecycle has two phases:
+### Our session lifecycle has two phases:
 
-1. Validation
+#### 1. Validation
 
 Client proves ownership of a key and receives:
 
 - Session state
 - Progress info
 
-2. Upload
+#### 2. Upload
 
 Client submits gameplay events tied to that session
 
@@ -50,7 +50,7 @@ POST /upload_session
 → Re-run validation logic or just accept the data
 ```
 
-Why this fails:
+### Why this fails:
 
 - Tight coupling between upload & validation
 
@@ -60,9 +60,9 @@ Why this fails:
 
 ## The Key Idea
 
-“If validation already proved this session is valid — just sign that fact.”
+*“If validation already proved this session is valid — just sign that fact.”*
 
-Instead of re-validating:
+### Instead of re-validating:
 
 - Issue a signed token after validation
 - Require that token for upload
@@ -232,6 +232,7 @@ private def verifyWithKms(keyId: String, signedSessionString: String, signature:
   "message": "Error authenticating session token"
 }
 ```
+
 | Code | Meaning          |
 | ---- | ---------------- |
 | 1043 | Invalid token    |
