@@ -103,7 +103,7 @@ Example Claims
 
 ### 2) Validate
 
-`POST /session/validate`
+`POST /validate`
 
 #### Input
 - Bearer token: **prevalidation JWT**
@@ -128,7 +128,7 @@ Example Claims
 
 ### 3) Upload
 
-`POST /v2/upload_session`
+`POST /upload_session`
 
 #### Input
 - Bearer token: **validation JWT**
