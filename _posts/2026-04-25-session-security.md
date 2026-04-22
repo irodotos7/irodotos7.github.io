@@ -14,7 +14,7 @@ How do you trust a client’s session during upload without re-running expensive
 
 In this post, we’ll walk through a production-grade pattern using:
 
-- Short-lived JWTs
+- Short-lived JWTs ( to be exact we have JWS beacuse we are signing it)
 - AWS KMS for signing & verification
 - A token chaining model that enforces trust across steps
 
@@ -92,14 +92,10 @@ Example Claims
 ```
 {
   "key": "k_abc123",
-  "sessionKey": null,
   "sessionStatus": "NotStarted" | "Started" | Completed,
-  "previouslyCompleted": [],
   "timestamp": "2024-01-15T10:00:00Z"
 }
 ```
-
-*previouslyCompleted allows reuse of past sessions.*
 
 ### 2) Validate
 
@@ -121,7 +117,6 @@ Example Claims
 {
   "sessionKey": "sk_xyz789",
   "key": "kk_abc123",
-  "reused", True | False,
   "timestamp": "2024-01-15T10:01:00Z"
 }
 ```
