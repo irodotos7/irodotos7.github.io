@@ -139,6 +139,10 @@
   padding: 0;
   background: transparent;
 
+  > :where(p, ul, ol, blockquote) {
+    max-width: 74ch;
+  }
+
   > :first-child {
     margin-top: 0;
   }

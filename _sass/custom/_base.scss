@@ -168,7 +168,24 @@ img {
   list-style: none;
 }
 
-.tag-list li,
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.9rem;
+}
+
+.tag-list li {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  color: var(--accent-dark);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
 .topic-cloud span {
   @include pill;
 }
@@ -220,5 +237,16 @@ img {
   .page-shell {
     padding-top: 0.5rem;
     padding-bottom: 3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

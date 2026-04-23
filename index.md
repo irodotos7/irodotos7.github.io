@@ -38,7 +38,7 @@ title: Home
   <a class="featured-card" href="{{ featured_post.url | relative_url }}">
     <p class="featured-date">{{ featured_post.date | date: "%B %-d, %Y" }}</p>
     <h3>{{ featured_post.title }}</h3>
-    <p>{{ featured_post.excerpt | strip_html | strip_newlines | truncate: 210 }}</p>
+    <p>{{ featured_post.excerpt | strip_html | strip_newlines | replace: "Setting the scene", "" | replace: "setting the scene", "" | truncate: 210 }}</p>
     <span class="featured-link">Read the article</span>
   </a>
 </section>
@@ -54,7 +54,7 @@ title: Home
       <article class="post-card">
         <p class="post-card-date">{{ post.date | date: "%b %-d, %Y" }}</p>
         <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-        <p class="post-card-copy">{{ post.excerpt | strip_html | strip_newlines | truncate: 180 }}</p>
+        <p class="post-card-copy">{{ post.excerpt | strip_html | strip_newlines | replace: "Setting the scene", "" | replace: "setting the scene", "" | truncate: 180 }}</p>
         {% if post.tags %}
           <ul class="tag-list">
             {% for tag in post.tags limit: 4 %}
@@ -67,16 +67,3 @@ title: Home
   </div>
 </section>
 
-<section class="topic-strip">
-  <div class="section-heading">
-    <p class="eyebrow">Focus</p>
-    <h2>What this blog is about</h2>
-  </div>
-
-  <div class="topic-cloud">
-    {% assign sorted_tags = site.tags | sort %}
-    {% for tag in sorted_tags %}
-      <span>{{ tag[0] }}</span>
-    {% endfor %}
-  </div>
-</section>
