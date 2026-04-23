@@ -86,7 +86,7 @@ We introduce **three endpoints** and **two token types**:
 
 #### Output
 
-**A preassessment token**
+**A prevalidation token**
 
 Example Claims
 ```
@@ -106,7 +106,7 @@ Example Claims
 
 #### What happens
 - Verify token via KMS
-- Enforce token type (cty = preassessment)
+- Enforce token type (cty = prevalidation)
 - Run validation logic
 - Create or resume session
 
