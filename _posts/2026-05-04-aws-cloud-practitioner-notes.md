@@ -1234,8 +1234,6 @@ Design principles:
 
 - NACL contains a numbered list of rules and evaluates these rules in increasing order while deciding whether to allow traffic
 
-- Page 27
-
 - WAF benefits:
     - Check for SQL injection
     - Block all traffic except what you allow
