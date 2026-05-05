@@ -1,6 +1,6 @@
 ---
 title: "Secure Session Workflows with AWS KMS-Signed JWTs (JWS)"
-date: 2026-04-21
+date: 2026-05-25
 tags:
     - KMS
     - JWT

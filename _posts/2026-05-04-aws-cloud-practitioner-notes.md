@@ -1,11 +1,11 @@
 ---
-title: "AWS Cloud Practitioner notes"
-date: 2026-05-04
-tags:
+Title: "AWS Cloud Practitioner notes"
+Date: 2026-05-04
+Tags:
     - AWS
     - Cloud Practitioner
     - Exam
-author: Irodotos Apostolou
+Author: Irodotos Apostolou
 ---
 ## What is Cloud computing Section
 
@@ -13,12 +13,12 @@ author: Irodotos Apostolou
 
 On demand delivery of resources , with pay-as-you-go pricing
 
-provision exactly the right type and size and almost instantly
+Provision exactly the right type and size and almost instantly
 
 ### Deployment models
-    - private
-    - public
-    - hybrid
+    - Private
+    - Public
+    - Hybrid
 
 ### Five characteristic of cloud computing
 
@@ -66,15 +66,15 @@ Pay on demand & reduce cost of ownership (TCO) and operational expense
 
 1. Infrastructure as a service (IaaS)
 
-networking, computers, data storages EC2,
+Networking, computers, data storages EC2,
 
 2. Platform as a service (PaaS)
 
-focus on the deployment and management of your apps Elastic Beanstalk
+Focus on the deployment and management of your apps Elastic Beanstalk
 
 3. Software as a service (SaaS)
 
-complete product that is running and managed by AWS Rekognition
+Complete product that is running and managed by AWS Rekognition
 
 ### Managed by you
 
@@ -98,7 +98,7 @@ complete product that is running and managed by AWS Rekognition
 
 - Customer : data, encryption and auth of client data, OS, networking and firewall
 
-networking traffic protection, application
+Networking traffic protection, application
 
 - AWS : all the infrastructure, compute, storage databases, regions, edge locations
 
@@ -114,17 +114,17 @@ networking traffic protection, application
 
 ### IAM Permission
 
-least privilege principle
+Least privilege principle
 
 ### IAM Security tools
 
 - IAM Credentials Report (account level)
 
-list all your accounts users and status
+List all your accounts users and status
 
 - IAM access advisor (user level)
 
-shows service permission to a user
+Shows service permission to a user
 
 ### IAM Guidelines & best practices
 
@@ -202,32 +202,32 @@ Examples:
 
 - On demand: Coming and stay in a hotel whenever we like and we
 
-pay full price
+Pay full price
 
 - Reserved: Planning ahead and if we plan to stay for a long time we
 
-get a discount
+Get a discount
 
 - Saving Plans: Pay a certain amount per hour for a certain period and
 
-stay in any room type
+Stay in any room type
 
 - Spot Instance: The hotel allows bid for empty rooms for a very low
 
-price but anytime someone bid higher you can get kicked
+Price but anytime someone bid higher you can get kicked
 
 - Dedicated host: Book the entire hotel
 
 - Capacity Reservation: Book a room for a period for full price even
 
-if you don’t stay in it
+If you don’t stay in it
 
 
 ## EC2 Instance Storage Section
 
 ### EBS (1st type of storage)
 
-- like a network drive you can attach to your instance
+- Like a network drive you can attach to your instance
 
 - Is allows your instance to persist data
 
@@ -289,7 +289,7 @@ if you don’t stay in it
 
 ### EFS Infrequent Access (EFS-IA)
 
-- storage class that cost optimized for files not access every day
+- Storage class that cost optimized for files not access every day
 
 - 92% cheaper than EFS
 
@@ -303,7 +303,7 @@ AZ - EBS Snapshots: for backup and move to different AZ
 - EC2 Image builder: automatically build test and distribute AMIs
 
 - EC2 instance storage - high performance HW disk attached to EC2
-instance - lost if instance stop/terminated
+Instance - lost if instance stop/terminated
 
 - EFS: Network file system can be attached to 100s EC2
 
@@ -311,13 +311,13 @@ instance - lost if instance stop/terminated
 
 ### Load balancing & Auto scaling
 
-- high availability & scalability
+- High availability & scalability
 
-- vertical scaling: increase instance size
+- Vertical scaling: increase instance size
 
-- horizontal scaling: increase number of instances
+- Horizontal scaling: increase number of instances
 
-- multi AZ
+- Multi AZ
 
 ### Scalability vs Elasticity vs Agility
 
@@ -326,14 +326,14 @@ instance - lost if instance stop/terminated
 
 - Elasticity: the system can auto-scale based on the load
 
-- cloud friendly: pay per use, match demand, handle cost
+- Cloud friendly: pay per use, match demand, handle cost
 
 - Agility: new IT resources are a click away reduce time to make
-resources
+Resources
 
 ### ELB - Elastic Load Balancer
 
-- managed load balancer
+- Managed load balancer
 
 - AWS guarantees that it will be working
 
@@ -347,20 +347,20 @@ resources
 HTTP routing rules - Static DNS (URL)
 
 - Network LB - ultra high performance - layer 4 - TCP / UDP - high
-performance millions of req - static IP
+Performance millions of req - static IP
 
 - Gateway LB - layer 3 - generic protocol - route traffic to firewall
-that you manage on EC2 - intrusion detection
+That you manage on EC2 - intrusion detection
 
 ### Auto Scaling Group
 
-- scale out (load increase) and scale in (load decrease)
+- Scale out (load increase) and scale in (load decrease)
 
-- ensure we have minimum & maximum number of machines running
+- Ensure we have minimum & maximum number of machines running
 
-- replace unhealthy instances
+- Replace unhealthy instances
 
-- cost savings run at optimal capacity
+- Cost savings run at optimal capacity
 
 ### Auto scaling strategies
 
@@ -372,45 +372,45 @@ that you manage on EC2 - intrusion detection
 
 ### S3
 
-- store objects (files) in buckets (directories)
+- Store objects (files) in buckets (directories)
 
-- defined at region level
+- Defined at region level
 
 ### Objects
 
-- have a key
+- Have a key
 
-- object value is the content of the body
+- Object value is the content of the body
 
-- metadata
+- Metadata
 
-- tags
+- Tags
 
-- version ID
+- Version ID
 
 ### Security
 
-- user-based IAM policies
+- User-based IAM policies
 
-- resource-based - bucket policies - object access (ACL) - bucket access
+- Resource-based - bucket policies - object access (ACL) - bucket access
 (ACL)
 
-- encryption
+- Encryption
 
 ### Versioning
 
-- enabled on bucket level
+- Enabled on bucket level
 
-- best practice to version your bucket
+- Best practice to version your bucket
 
 ### Replication (CRR & SRR)
 
-- must enable versioning
+- Must enable versioning
 
 - Cross region replication (CRR): lower latency, replication across acc
 
 - Same region replication (SRR): live replication between prod and test
-account
+Account
 
 ### S3 Storage classes
 
@@ -418,59 +418,59 @@ account
 
 - Used for frequently accessed data
 
-- low latency & high throughput
+- Low latency & high throughput
 
 - Infrequent Access Standard (S3 standard - IA) - less frequent access
-but requires rapid access when needed - use cases: backups, disaster
-recovery
+But requires rapid access when needed - use cases: backups, disaster
+Recovery
 
 - One zone - IA - high durability in one AZ - use cases: storing
-secondary backups
+Secondary backups
 
 - Glacier storage - low cost meant for archiving
 
 1. Glacier Instant Retrieval
 
--   milliseconds retrieval
--   minimum storage 90 days
+-   Milliseconds retrieval
+-   Minimum storage 90 days
 
 2. Glacier Flexible Retrieval
 
--   expedited (1-5 min), standard (3-5 hours), bulk (5-12 hours)
--   minimum storage 90 days
+-   Expedited (1-5 min), standard (3-5 hours), bulk (5-12 hours)
+-   Minimum storage 90 days
 
 3. Glacier Deep Archive
 
--   standard (12 hours), bulk (48 hours)
--   minimum storage 180 days
+-   Standard (12 hours), bulk (48 hours)
+-   Minimum storage 180 days
 
 ### Intelligent Tiering
 
-- monitor and auto-tiering fee
+- Monitor and auto-tiering fee
 
-- moves objects automatically between access tiers based on usage
+- Moves objects automatically between access tiers based on usage
 
 ### S3 Express One Zone
 
-- high performance, in one AZ
+- High performance, in one AZ
 
 - 10x faster than standard S3 and 50% less cost
 
 ### S3 Encryption
 
-- server side: servers encrypt files after upload
+- Server side: servers encrypt files after upload
 
-- client side: encrypt file before uploading
+- Client side: encrypt file before uploading
 
 ### AWS Snowball
 
-- collect and process data at the edge and migrate data into and out AWS
+- Collect and process data at the edge and migrate data into and out AWS
 
 ### AWS Storage Gateway
 
-- bridge between on-premise data and cloud data on S3
+- Bridge between on-premise data and cloud data on S3
 
-- hybrid storage service + allow on premise to seamlessly use AWS cloud
+- Hybrid storage service + allow on premise to seamlessly use AWS cloud
 
 ## Databases Section
 
@@ -480,9 +480,9 @@ secondary backups
 
 - SQL
 
-- advantages over using RDS versus deploying DB on EC2 - automated
-provisioning, OS patching - continuous backups and restore to specific
-timestamps - scaling
+- Advantages over using RDS versus deploying DB on EC2 - automated
+Provisioning, OS patching - continuous backups and restore to specific
+Timestamps - scaling
 
 ### Amazon Aurora
 
@@ -504,31 +504,31 @@ timestamps - scaling
 
 ### Amazon ElastiCache
 
-- in memory DB
+- In memory DB
 
-- high performance low latency
+- High performance low latency
 
-- reduce load off DB for read intensive workloads
+- Reduce load off DB for read intensive workloads
 
 ### Dynamo DB
 
-- fully managed high availability with replication across 3 AZ
+- Fully managed high availability with replication across 3 AZ
 
 - NoSQL DB
 
-- serverless
+- Serverless
 
 ### Dynamo DB accelerator (DAX)
 
-- in memory cache for Dynamo DB
+- In memory cache for Dynamo DB
 
 - 10x improvement
 
-- only used with Dynamo
+- Only used with Dynamo
 
 ### Dynamo DB - Global Tables
 
-- make dynamo accessible low latency in multi region
+- Make dynamo accessible low latency in multi region
 
 - Active-Active application (read/write to any region)
 
@@ -536,70 +536,70 @@ timestamps - scaling
 
 - Postgre SQL for OLAP (online analytical processing)
 
-- columnar storage data
+- Columnar storage data
 
-- massive parallel query execution
+- Massive parallel query execution
 
-- serverless
+- Serverless
 
-- pay for what you use
+- Pay for what you use
 
 ### Amazon EMR (Elastic Map Reduce)
 
-- creating Hadoop clusters (big data)
+- Creating Hadoop clusters (big data)
 
-- data processing, big data
+- Data processing, big data
 
 ### Amazon Athena
 
-- serverless query service to analyze data stored in S3
+- Serverless query service to analyze data stored in S3
 
 ### Amazon QuickSight
 
-- serverless machine learning powered business to create interactive
-dashboards
+- Serverless machine learning powered business to create interactive
+Dashboards
 
 ### Document DB
 
-- same as Mongo DB
+- Same as Mongo DB
 
-- store JSON
+- Store JSON
 
 ### Amazon Neptune
 
 - Graph DB
 
-- social network type DB
+- Social network type DB
 
 ### Amazon Timestream
 
-- time series DB
+- Time series DB
 
 ### Amazon Blockchain
 
-- execute transactions without the need of a trusted central authority
+- Execute transactions without the need of a trusted central authority
 
 ### AWS Glue
 
-- extract, transform and load (ETL) service
+- Extract, transform and load (ETL) service
 
-- serverless
+- Serverless
 
 ### Database Migration Service (DMS)
 
-- quickly and securely migrate databases to AWS
+- Quickly and securely migrate databases to AWS
 
 ### Databases & Analytics Summary
 
 - Relational DB: OLTP: RDS & Aurora (serverless)
 
-- multi-AZ, read replicas, multi regions
+- Multi-AZ, read replicas, multi regions
 
 - In-memory DB: Elastic Cache
 
-- key/value DB: Dynamo DB (serverless) & DAX (cache for DynamoDB)
+- Key/value DB: Dynamo DB (serverless) & DAX (cache for DynamoDB)
 
-- warehouse OLAP: Redshift
+- Warehouse OLAP: Redshift
 
 - Hadoop cluster: EMR
 
@@ -625,66 +625,66 @@ dashboards
 
 - Launch Docker containers on AWS
 
-- you must provision & maintain the infra (the EC2 instances)
+- You must provision & maintain the infra (the EC2 instances)
 
 ### Fargate
 
 - Launch Docker containers on AWS
 
-- you MUST NOT provision the infra
+- You MUST NOT provision the infra
 
-- serverless
+- Serverless
 
 ### ECR (Elastic Container Registry)
 
-- store your docker images
+- Store your docker images
 
 ### Amazon EKS (Elastic Kubernetes Service)
 
-- launch and manage kubernetes cluster on AWS
+- Launch and manage kubernetes cluster on AWS
 
 ### Lambda
 
-- virtual functions
+- Virtual functions
 
-- serverless, scaling is automated
+- Serverless, scaling is automated
 
-- short executions
+- Short executions
 
-- event driven
+- Event driven
 
-- price -\> pay per call
+- Price -\> pay per call
 
 ### API Gateway
 
-- create, publish, maintain, monitor and secure APIs
+- Create, publish, maintain, monitor and secure APIs
 
-- serverless and scalable
+- Serverless and scalable
 
 ### AWS Batch
 
-- fully managed batch processing at any scale
+- Fully managed batch processing at any scale
 
-- dynamically launch EC2 instances or Spot instances
+- Dynamically launch EC2 instances or Spot instances
 
-- batch jobs are defined as docker images and run on ECS
+- Batch jobs are defined as docker images and run on ECS
 
 
 ### Lambda Vs Batch
 
 - Lambda - time limit - limited runtimes - limited temporary disk
-space - serverless
+Space - serverless
 
 - Batch - no time limit - any runtime as long as provided as Docker
-image - rely on EBS - rely on EC2 (can be managed by AWS)
+Image - rely on EBS - rely on EC2 (can be managed by AWS)
 
 ### Amazon Lightsail
 
-- virtual servers, storage, databases and networking
+- Virtual servers, storage, databases and networking
 
-- low and predictable pricing
+- Low and predictable pricing
 
-- great for people with low cloud experience
+- Great for people with low cloud experience
 
 ### Deploying and Managing infra at scale
 
@@ -715,36 +715,36 @@ image - rely on EBS - rely on EC2 (can be managed by AWS)
 
 ### Why global application
 
-- application deployed in multiple geographies locations
+- Application deployed in multiple geographies locations
 
-- multi region and/or edge locations
+- Multi region and/or edge locations
 
 - Benefits - decrease latency - disaster recovery - attack protection
 
 ### Route 53: Global DNS
 
-- route users to closest deployment
+- Route users to closest deployment
 
-- policies - simple routing - no health checks - weighted routing -
-latency routing - failover routing - health checks
+- Policies - simple routing - no health checks - weighted routing -
+Latency routing - failover routing - health checks
 
 ### CloudFront: Global CDN
 
-- cache static content for UI
+- Cache static content for UI
 
-- improves read performance
+- Improves read performance
 
 - DDoS protection
 
-- edge cache content static
+- Edge cache content static
 
 ### S3 acceleration
 
-- transfer files to edge location and forward them to S3
+- Transfer files to edge location and forward them to S3
 
 ### Global accelerator
 
-- improves availability & performance using AWS global network
+- Improves availability & performance using AWS global network
 
 ### CloudFront Origins
 
@@ -766,21 +766,21 @@ latency routing - failover routing - health checks
 
 - Extension of regions
 
-- eg eu-west-1 (London)
+- Eg eu-west-1 (London)
 
 ### Global Application Architectures
 
 - Single region, single AZ - High Availability X - Global latency X -
-easy
+Easy
 
 - Single region, multi AZ - High Availability ✓ - Global latency X -
-more difficult
+More difficult
 
 - Multi region, Active-Passive - High availability ✓ - Global read
-latency ✓ - Global write latency X - more difficult
+Latency ✓ - Global write latency X - more difficult
 
 - Multi region, Active-Active - Availability ✓ - Read ✓ - Write ✓ -
-difficult
+Difficult
 
 ## Cloud Integration Section
 
@@ -834,7 +834,7 @@ difficult
 
 ### AWS Health Dashboard
 
-- status of all AWS services
+- Status of all AWS services
 
 ### AWS Account Health Dashboard
 
@@ -846,163 +846,163 @@ difficult
 
 ### VPC
 
-- VPC Virtual Private Cloud
+- VPC: Virtual Private Cloud
 
-- Subnets divide AZ network partition of your VPC
+- Subnets: divide AZ network partition of your VPC
 
-- Internet Gateway at the VPC level provides internet access to the VPC
+- Internet Gateway: at the VPC level provides internet access to the VPC
 
-- NAT Gateway subnet level provides internet access to your subnet
+- NAT Gateway: subnet level provides internet access to your subnet
 
-- NACL stateless subnet rules for inbound and outbound
+- NACL: stateless subnet rules for inbound and outbound
 
-- VPC Peering connect 2 VPC without overlapping IP addresses
+- VPC Peering: connect 2 VPC without overlapping IP addresses
 
-- Elastic IP fixed public IP
+- Elastic IP: fixed public IP
 
-- VPC Endpoints provide private access to AWS services within VPC
+- VPC Endpoints: provide private access to AWS services within VPC
 
-- PrivateLink private connection to a 3rd party VPC
+- PrivateLink: private connection to a 3rd party VPC
 
-- VPN for hybrid cloud
+- VPN: for hybrid cloud
 
-- Direct Connect dedicated private connection to AWS
+- Direct Connect: dedicated private connection to AWS
 
-- Transit Gateway connect thousands of VPC and on-premises networks
-together
+- Transit Gateway: connect thousands of VPC and on-premises networks
+Together
 
 ## Security & Compliance Section
 
-- Shield DDoS protection + 24/7 support
+- Shield: DDoS protection + 24/7 support
 
-- WAF firewall to filter incoming request
+- WAF: Direwall to filter incoming request
 
-- KMS managed encryption keys
+- KMS: managed encryption keys
 
-- Cloud HSM AWS encryption but we manage the keys
+- CloudHSM: AWS encryption but we manage the keys
 
-- AWS Certificate Manager manage SSL/TLS certificates
+- AWS Certificate Manager: manage SSL/TLS certificates
 
-- Artifact access to compliance reports such as PCI, ISO
+- Artifact: access to compliance reports such as PCI, ISO
 
 ### Guard Duty
 
-- find malicious behavior with VPC , DNS
+- Find malicious behavior with VPC , DNS
 
 ### Inspector
 
-- find software vulnerabilities in EC2 , ECR images and lambda
+- Find software vulnerabilities in EC2 , ECR images and lambda
 
 ### Network Firewall
 
-- protect VPC against network attacks
+- Protect VPC against network attacks
 
 ### Config
 
-- track config changes and compliance against rules
+- Track config changes and compliance against rules
 
 ### Macie
 
-- find sensitive data on S3
+- Find sensitive data on S3
 
 ### Cloud Trail
 
-- track API calls made by user within account
+- Track API calls made by user within account
 
 ### AWS Security Hub
 
-- central security findings from multiple AWS services
+- Central security findings from multiple AWS services
 
 ### Amazon Detective
 
-- find root cause of security issues or suspicious activities
+- Find root cause of security issues or suspicious activities
 
 ### AWS Abuse
 
-- report AWS resources for abusive or illegal purposes
+- Report AWS resources for abusive or illegal purposes
 
 ### Root user privileges
 
-- change account settings
+- Change account settings
 
-- close your AWS account
+- Close your AWS account
 
-- change or cancel your AWS support plan
+- Change or cancel your AWS support plan
 
-- register as a seller in the Reserved Instance Marketplace
+- Register as a seller in the Reserved Instance Marketplace
 
 ### IAM Access Analyzer
 
-- identify which resources are shared externally
+- Identify which resources are shared externally
 
 ### Firewall Manager
 
-- manage security rules across organization (WAF, Shield)
+- Manage security rules across organization (WAF, Shield)
 
 ## Machine Learning Section
 
-- Rekognition face detection
+- Rekognition: Face detection
 
-- Transcribe audio to text
+- Transcribe: Audio to text
 
-- Polly text to audio
+- Poll: Text to audio
 
-- Translate
+- Translate: To translate
 
-- Lex build conversational bots
+- Lex: build conversational bots / chatbots
 
-- Connect contact center / calls
+- Connec: For contact center / calls
 
-- Comprehend NLP
+- Comprehend: NLP
 
-- Sage Maker build ML models
+- Sage Maker: build ML models easy for developers
 
-- Kendra document search service search engine
+- Kendr: Document search service search engine
 
-- Personalize real time recommendations
+- Personaliz: Real time recommendations
 
-- Textract extract text and data from documents
+- Textract: Extract text and data from documents
 
 ## Account Management Section
 
 ### AWS Organization
 
-- operate multiple accounts
+- Operate multiple accounts
 
-- one billing across all accounts
+- One billing across all accounts
 
-- aggregated usage
+- Aggregated usage
 
-- reserve EC2 instances for optimal savings
+- Reserve EC2 instances for optimal savings
 
 ### SCP (Service Control Policies)
 
-- restrict accounts powers
+- Restrict accounts powers
 
-- applied to all users & roles
+- Applied to all users & roles
 
 ### AWS Control Tower
 
-- easily set up multiple accounts with best practices
+- Easily set up multiple accounts with best practices
 
 ### AWS RAM (Resource Access Manager)
 
-- share AWS resources you own with other AWS accounts
+- Share AWS resources you own with other AWS accounts
 
 ### AWS Service Catalog
 
-- self service portal to launch a set of authorized products pre defined
-by admins
+- Self service portal to launch a set of authorized products pre defined
+By admins
 
 ### AWS Pricing Models
 
-- pay as you go
+- Pay as you go
 
-- save when you reserve
+- Save when you reserve
 
-- pay less by using more
+- Pay less by using more
 
-- pay less as AWS grows
+- Pay less as AWS grows
 
 ### AWS Best Practices
 
@@ -1105,52 +1105,52 @@ by admins
 1. Operational Excellence: run and monitor systems
 
 Design principles:
-- perform operations as code (IaC)
-- make frequent small reversible changes
-- refine operations procedures
-- anticipate failure
-- learn from failures
-- use managed services
-- implement observability
+- Perform operations as code (IaC)
+- Make frequent small reversible changes
+- Refine operations procedures
+- Anticipate failure
+- Learn from failures
+- Use managed services
+- Implement observability
 
 2. Security: protect information systems
 
 Design principles:
-- implement strong identity foundation
-- enable traceability
-- apply security at all levels
-- automate security best practices
-- protect data in transit and at rest
-- keep people away from data
-- prepare for security events
-- shared responsibility model
+- Implement strong identity foundation
+- Enable traceability
+- Apply security at all levels
+- Automate security best practices
+- Protect data in transit and at rest
+- Keep people away from data
+- Prepare for security events
+- Shared responsibility model
 
 3. Reliability: recover from disruptions
 
 Design principles:
-- test recovery procedures
-- automatically recover from failure
-- scale horizontally
-- stop guessing capacity
-- manage change in automation
+- Test recovery procedures
+- Automatically recover from failure
+- Scale horizontally
+- Stop guessing capacity
+- Manage change in automation
 
 4. Performance Efficiency
 
 Design principles:
-- democratize advanced technologies
-- go global in minutes
-- use serverless architecture
-- experiment more often
-- mechanical sympathy
+- Democratize advanced technologies
+- Go global in minutes
+- Use serverless architecture
+- Experiment more often
+- Mechanical sympathy
 
 5. Cost Optimization
 
 Design principles:
-- adopt consumption model
-- measure overall efficiency
-- stop spending money on data center operations
-- analyze and attribute expenditure
-- use managed and application level services
+- Adopt consumption model
+- Measure overall efficiency
+- Stop spending money on data center operations
+- Analyze and attribute expenditure
+- Use managed and application level services
 
 6. Sustainability
 
