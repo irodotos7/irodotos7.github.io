@@ -53,10 +53,39 @@ POST /upload_session
 ### Why this fails:
 
 - Tight coupling between upload & validation
+  - Now the upload service must answer questions like:
+    - Does this session belong to this key?
+    - Was the session already validated?
+    - Is the session still active?
+    - Was it already completed?
+
+  - Over time this becomes difficult to maintain because:
+    - validation rules get duplicated
+    - services become dependent on shared state
+    - performance degrades under repeated checks
 
 - Vulnerable to session key substitution
+  - If the backend only checks:
+    - “does this session exist?” => then uploads may be accepted for the wrong session.
 
 - Easy to accept events for unauthorized sessions
+  - Without a signed validation token, the upload endpoint has no proof that:
+    - validation actually happened
+    - the session was approved
+    - the uploader is authorized for that session
+
+  - This makes it easy for clients to:
+    - replay old uploads
+    - fabricate requests
+    - upload directly without validation
+    - target sessions they should not control
+
+  - Example
+    1. Client validates Session A
+    2. Client modifies request
+    3. Uploads events for Session B
+    4. Server accepts upload
+
 
 ## The Key Idea
 
@@ -89,10 +118,10 @@ We introduce **three endpoints** and **two token types**:
 **A prevalidation token**
 
 Example Claims
-```
+```json
 {
   "key": "k_abc123",
-  "sessionStatus": "NotStarted" | "Started" | Completed,
+  "sessionStatus": "NotStarted" | "Started" | "Completed",
   "timestamp": "2024-01-15T10:00:00Z"
 }
 ```
@@ -113,7 +142,7 @@ Example Claims
 #### Output
 
 **A session token**
-```
+```json
 {
   "sessionKey": "sk_xyz789",
   "key": "kk_abc123",
@@ -134,7 +163,7 @@ Example Claims
 - Insert events using that key
 
 Request Example
-```
+```json
 {
   "key": "kk_abc123",
   "session_events": {
@@ -155,7 +184,7 @@ Request Example
 | Used by    | validate          | upload      |
 
 ## JWT Structure
-```
+```text
 Header:  { "alg": "RS256", "kid": "<kms-key-id>", "cty": "session" }
 Payload: { ...claims, "iat": ..., "exp": ... }
 ```
@@ -199,7 +228,7 @@ private def signString(keyId: String, unsignedString: String): App[String] =
 - Call KMS Verify
 - Parse claims by cty
 
-```
+```scala
 private def verifyWithKms(keyId: String, signedSessionString: String, signature: String): App[Unit] =
   RIO.ask[Env].mapIO { env =>
     val unsignedTokenString = signedSessionString.substring(0, signedSessionString.lastIndexOf('.'))
@@ -220,7 +249,7 @@ private def verifyWithKms(keyId: String, signedSessionString: String, signature:
 ```
 
 ## Error Handling
-```
+```json
 {
   "result": "failure",
   "code": 1043,

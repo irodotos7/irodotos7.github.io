@@ -136,6 +136,111 @@ img {
   padding: 1rem 0 5rem;
 }
 
+/* Global Rouge syntax highlighting for fenced code blocks */
+div.highlighter-rouge,
+.highlight {
+  background: #1c2530;
+  border-radius: var(--radius-md);
+}
+
+.highlight pre,
+.highlighter-rouge pre {
+  margin: 0;
+  overflow-x: auto;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(20, 33, 43, 0.08);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: #edf2f7;
+  line-height: 1.6;
+}
+
+.highlight .c,
+.highlight .cm,
+.highlight .c1,
+.highlight .cs {
+  color: #90a4b8;
+  font-style: italic;
+}
+
+.highlight .k,
+.highlight .kc,
+.highlight .kd,
+.highlight .kn,
+.highlight .kp,
+.highlight .kr,
+.highlight .kt {
+  color: #ff7ab2;
+}
+
+.highlight .nf,
+.highlight .fm,
+.highlight .nc,
+.highlight .nn {
+  color: #82aaff;
+}
+
+.highlight .s,
+.highlight .sa,
+.highlight .sb,
+.highlight .sc,
+.highlight .sd,
+.highlight .s1,
+.highlight .s2,
+.highlight .se,
+.highlight .sh,
+.highlight .si,
+.highlight .sx {
+  color: #c3e88d;
+}
+
+.highlight .m,
+.highlight .mb,
+.highlight .mf,
+.highlight .mh,
+.highlight .mi,
+.highlight .mo,
+.highlight .il {
+  color: #f78c6c;
+}
+
+.highlight .o,
+.highlight .ow,
+.highlight .p {
+  color: #89ddff;
+}
+
+.highlight .nb,
+.highlight .bp,
+.highlight .nv,
+.highlight .vc,
+.highlight .vg,
+.highlight .vi {
+  color: #ffd580;
+}
+
+.highlight .err {
+  color: #f07178;
+  background: rgba(240, 113, 120, 0.15);
+}
+
+/* Inline code should not inherit block code background */
+code.highlighter-rouge,
+:not(pre) > code {
+  padding: 0.12rem 0.35rem;
+  border-radius: 0.4rem;
+  background: rgba(20, 33, 43, 0.08);
+  color: var(--accent-dark);
+  font-size: 0.95em;
+}
+
+/* Bash snippets like `terraform init` are often plain text tokens; color them explicitly */
+.language-bash .highlight code,
+.language-shell .highlight code,
+.language-console .highlight code {
+  color: #c3e88d;
+}
+
 .eyebrow {
   margin: 0 0 0.9rem;
   color: var(--accent-dark);

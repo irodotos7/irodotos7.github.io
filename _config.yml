@@ -2,6 +2,10 @@ title: Irodotos7 homepage
 description: Bookmark this to keep an eye on my project updates!
 url: "https://irodotos7.github.io"
 baseurl: ""
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  syntax_highlighter: rouge
 plugins:
   - jekyll-seo-tag
 defaults:
