@@ -59,11 +59,6 @@ POST /upload_session
     - Is the session still active?
     - Was it already completed?
 
-  - Over time this becomes difficult to maintain because:
-    - validation rules get duplicated
-    - services become dependent on shared state
-    - performance degrades under repeated checks
-
 - Vulnerable to session key substitution
   - If the backend only checks:
     - “does this session exist?” => then uploads may be accepted for the wrong session.
@@ -73,12 +68,6 @@ POST /upload_session
     - validation actually happened
     - the session was approved
     - the uploader is authorized for that session
-
-  - This makes it easy for clients to:
-    - replay old uploads
-    - fabricate requests
-    - upload directly without validation
-    - target sessions they should not control
 
   - Example
     1. Client validates Session A
