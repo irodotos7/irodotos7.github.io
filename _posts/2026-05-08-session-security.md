@@ -115,9 +115,7 @@ Example Claims
 }
 ```
 
-### 2) Validate
-
-`POST /validate`
+### 2) `POST /validate`
 
 #### Input
 - Bearer token: **prevalidation JWT**
@@ -139,9 +137,7 @@ Example Claims
 }
 ```
 
-### 3) Upload
-
-`POST /upload_session`
+### 3) `POST /upload`
 
 #### Input
 - Bearer token: **validation JWT**
@@ -168,7 +164,7 @@ Request Example
 
 | Property   | Prevalidation     | Validation     |
 | ---------- | ----------------- | ----------- |
-| `cty`      | `"prevalidation"` | `"validation"` |
+| `cty`      | `prevalidation`   | `validation` |
 | sessionKey | Optional          | Required    |
 | Used by    | validate          | upload      |
 
